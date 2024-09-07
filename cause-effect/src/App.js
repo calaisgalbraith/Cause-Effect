@@ -1,24 +1,29 @@
-import logo from './logo.svg';
+import React, { useState } from "react";
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Profile from './profile/Profile';
+import Sidebar from './sidebar/Sidebar';
 
 function App() {
+  const [ selectedDog, setSelectedDog ] = useState('AA')
+  function handleAnimalClick (e) {
+    setSelectedDog(e.target.innerHTML)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <>
+    <header className="p-3 bg-dark text-white">Available dogs</header>
+    <div className="container-fluid">
+      <div className="row">
+        <div className="col-2 sidebar">
+          <Sidebar animalClickFunc={handleAnimalClick}></Sidebar>
+        </div>
+        <div className="col">
+          <Profile selectedDog={selectedDog}/>
+        </div>
+      </div>
     </div>
+    </>
   );
 }
 
